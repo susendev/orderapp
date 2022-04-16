@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Moya
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -16,7 +17,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        State.shared.user = Defaults[.user]
+        
+        let window = UIWindow(windowScene: windowScene)
+        window.backgroundColor = .white
+        self.window = window
+        
+        let nav = UINavigationController(rootViewController: ViewController())
+        window.rootViewController = nav
+        window.makeKeyAndVisible()
+//        Defaults[.user] = nil
+        if State.shared.user == nil {
+            let login = LoginViewController()
+            login.modalPresentationStyle = .overFullScreen
+            nav.present(login, animated: false, completion: nil)
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
