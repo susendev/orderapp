@@ -20,6 +20,7 @@ let apiProvider = MoyaProvider<API>.init(endpointClosure: MoyaProvider.defaultEn
 enum API {
     case userLogin(username: String, password: String)
     case userLogout
+    case changePassword(old: String, new: String)
     
     case allUsers
     case addUser(detail: [String: Any])
@@ -53,12 +54,14 @@ extension API: TargetType {
             return "/users"
         case .deleteUser(let id):
             return "/users/\(id)"
+        case .changePassword:
+            return "/user/changePassword"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .userLogin, .userLogout, .addRoom, .addUser:
+        case .userLogin, .userLogout, .addRoom, .addUser, .changePassword:
             return .post
         case .allRooms, .roomDetail, .allUsers:
             return .get
@@ -90,6 +93,8 @@ extension API: TargetType {
             break
         case .deleteUser:
             break
+        case let .changePassword(old, new):
+            body = ["old": old, "new": new]
         }
         if method == .get {
             return .requestParameters(parameters: query, encoding: URLEncoding.queryString)

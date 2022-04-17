@@ -87,7 +87,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if  State.shared.user?.role == .admin {
+        if State.shared.user?.role == .admin {
             switch indexPath.row {
             case 0:
                 self.navigationController?.pushViewController(RoomsViewController(), animated: true)
@@ -95,6 +95,23 @@ extension ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDa
                 break
             case 2:
                 self.navigationController?.pushViewController(UsersViewController(), animated: true)
+            case 3:
+                Defaults[.user] = nil
+                State.shared.user = nil
+                let vc = LoginViewController()
+                vc.modalPresentationStyle = .overFullScreen
+                self.present(vc, animated: true)
+            default:
+                break
+            }
+        } else {
+            switch indexPath.row {
+            case 0:
+                self.navigationController?.pushViewController(RoomsViewController(), animated: true)
+            case 1:
+                break
+            case 2:
+                self.navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
             case 3:
                 Defaults[.user] = nil
                 State.shared.user = nil

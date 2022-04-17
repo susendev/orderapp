@@ -55,6 +55,7 @@ class LoginViewController: UIViewController {
         let view = UITextField()
         view.placeholder = "请输入密码"
         view.borderStyle = .none
+        view.isSecureTextEntry = true
         return view
     }()
     
