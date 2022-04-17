@@ -20,6 +20,11 @@ let apiProvider = MoyaProvider<API>.init(endpointClosure: MoyaProvider.defaultEn
 enum API {
     case userLogin(username: String, password: String)
     case userLogout
+    
+    case allUsers
+    case addUser(detail: [String: Any])
+    case deleteUser(id: String)
+
     case allRooms
     case roomDetail(id: String)
     case changeRoomDetail(id: String, detail: [String: Any])
@@ -44,18 +49,22 @@ extension API: TargetType {
             return "/rooms"
         case .roomDetail(let id), .changeRoomDetail(let id, _), .deleteRoom(let id):
             return "/rooms/\(id)"
+        case .allUsers, .addUser:
+            return "/users"
+        case .deleteUser(let id):
+            return "/users/\(id)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .userLogin, .userLogout, .addRoom:
+        case .userLogin, .userLogout, .addRoom, .addUser:
             return .post
-        case .allRooms, .roomDetail:
+        case .allRooms, .roomDetail, .allUsers:
             return .get
         case .changeRoomDetail:
             return .put
-        case .deleteRoom:
+        case .deleteRoom, .deleteUser:
             return .delete
         }
     }
@@ -73,9 +82,13 @@ extension API: TargetType {
             break
         case .roomDetail:
             break
-        case let .changeRoomDetail(_, detail), let .addRoom(detail):
+        case let .changeRoomDetail(_, detail), let .addRoom(detail), let .addUser(detail):
             body = detail
         case .deleteRoom:
+            break
+        case .allUsers:
+            break
+        case .deleteUser:
             break
         }
         if method == .get {

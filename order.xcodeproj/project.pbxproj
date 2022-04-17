@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		052B3B2C16C75AA460E8B67C /* Pods_order.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9587B0F6AA48C6E34599AFA9 /* Pods_order.framework */; };
-		0B5AA82E280AFF9F00416EEC /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA82D280AFF9F00416EEC /* AddRoomViewController.swift */; };
 		0B5AA836280B02C100416EEC /* RoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA835280B02C100416EEC /* RoomDetailViewController.swift */; };
+		0B5AA83A280BDF0300416EEC /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA839280BDF0300416EEC /* UsersViewController.swift */; };
+		0B5AA83C280BEC7700416EEC /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA83B280BEC7700416EEC /* AddUserViewController.swift */; };
 		0B6BE80428085F3F00307A1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BE80328085F3F00307A1F /* AppDelegate.swift */; };
 		0B6BE80628085F3F00307A1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BE80528085F3F00307A1F /* SceneDelegate.swift */; };
 		0B6BE80828085F3F00307A1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BE80728085F3F00307A1F /* ViewController.swift */; };
@@ -51,8 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B5AA82D280AFF9F00416EEC /* AddRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
 		0B5AA835280B02C100416EEC /* RoomDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomDetailViewController.swift; sourceTree = "<group>"; };
+		0B5AA839280BDF0300416EEC /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		0B5AA83B280BEC7700416EEC /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		0B6BE80028085F3F00307A1F /* order.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = order.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6BE80328085F3F00307A1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B6BE80528085F3F00307A1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B5AA837280BDEB200416EEC /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				0B6BE850280AC07600307A1F /* RoomsViewController.swift */,
+				0B5AA835280B02C100416EEC /* RoomDetailViewController.swift */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		0B5AA838280BDEEF00416EEC /* User */ = {
+			isa = PBXGroup;
+			children = (
+				0B5AA839280BDF0300416EEC /* UsersViewController.swift */,
+				0B5AA83B280BEC7700416EEC /* AddUserViewController.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		0B6BE7F728085F3F00307A1F = {
 			isa = PBXGroup;
 			children = (
@@ -144,9 +164,8 @@
 				0B6BE80528085F3F00307A1F /* SceneDelegate.swift */,
 				0B6BE80728085F3F00307A1F /* ViewController.swift */,
 				0B6BE84128096CEE00307A1F /* LoginViewController.swift */,
-				0B6BE850280AC07600307A1F /* RoomsViewController.swift */,
-				0B5AA82D280AFF9F00416EEC /* AddRoomViewController.swift */,
-				0B5AA835280B02C100416EEC /* RoomDetailViewController.swift */,
+				0B5AA838280BDEEF00416EEC /* User */,
+				0B5AA837280BDEB200416EEC /* Room */,
 				0B6BE847280A664E00307A1F /* Models */,
 				0B6BE83828090D9100307A1F /* utils */,
 				0B6BE8332808621100307A1F /* network */,
@@ -465,9 +484,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B5AA83C280BEC7700416EEC /* AddUserViewController.swift in Sources */,
 				0B6BE853280AC86400307A1F /* RoomModel.swift in Sources */,
 				0B6BE84228096CEE00307A1F /* LoginViewController.swift in Sources */,
 				0B6BE84F280AAE6B00307A1F /* NotificationName.swift in Sources */,
+				0B5AA83A280BDF0300416EEC /* UsersViewController.swift in Sources */,
 				0B6BE846280A5EF800307A1F /* Colors.swift in Sources */,
 				0B6BE80828085F3F00307A1F /* ViewController.swift in Sources */,
 				0B6BE84D280A9AD200307A1F /* State.swift in Sources */,
@@ -476,7 +497,6 @@
 				0B5AA836280B02C100416EEC /* RoomDetailViewController.swift in Sources */,
 				0B6BE83A28090DB600307A1F /* Defaults.swift in Sources */,
 				0B6BE8352808623700307A1F /* NetWork.swift in Sources */,
-				0B5AA82E280AFF9F00416EEC /* AddRoomViewController.swift in Sources */,
 				0B6BE851280AC07600307A1F /* RoomsViewController.swift in Sources */,
 				0B6BE80628085F3F00307A1F /* SceneDelegate.swift in Sources */,
 				0B6BE849280A667600307A1F /* UserModel.swift in Sources */,
