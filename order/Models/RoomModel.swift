@@ -9,7 +9,7 @@ import Foundation
 
 struct Room: Codable {
     
-    var id: UUID?
+    var id: String
 
     var name: String
     

@@ -21,6 +21,10 @@ enum API {
     case userLogin(username: String, password: String)
     case userLogout
     case allRooms
+    case roomDetail(id: String)
+    case changeRoomDetail(id: String, detail: [String: Any])
+    case addRoom(detail: [String: Any])
+    case deleteRoom(id: String)
 }
 
 
@@ -36,17 +40,23 @@ extension API: TargetType {
             return "/user/login"
         case .userLogout:
             return "/user/register"
-        case .allRooms:
+        case .allRooms, .addRoom:
             return "/rooms"
+        case .roomDetail(let id), .changeRoomDetail(let id, _), .deleteRoom(let id):
+            return "/rooms/\(id)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .userLogin, .userLogout:
+        case .userLogin, .userLogout, .addRoom:
             return .post
-        case .allRooms:
+        case .allRooms, .roomDetail:
             return .get
+        case .changeRoomDetail:
+            return .put
+        case .deleteRoom:
+            return .delete
         }
     }
     
@@ -61,9 +71,12 @@ extension API: TargetType {
             body = [:]
         case .allRooms:
             break
-        }
-        if let id = Defaults[.user]?.id {
-            body["id"] = id
+        case .roomDetail:
+            break
+        case let .changeRoomDetail(_, detail), let .addRoom(detail):
+            body = detail
+        case .deleteRoom:
+            break
         }
         if method == .get {
             return .requestParameters(parameters: query, encoding: URLEncoding.queryString)
@@ -72,8 +85,10 @@ extension API: TargetType {
     }
     
     var headers: [String : String]? {
+        if let id = Defaults[.user]?.id {
+            return ["id": id]
+        }
         return nil
     }
-    
     
 }

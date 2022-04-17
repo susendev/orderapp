@@ -28,16 +28,29 @@ class RoomsViewController: UIViewController {
         }
     }
     
+    var role: Role {
+        return State.shared.user?.role ?? .user
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setViews()
         bindData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        bindData()
+    }
+    
     private func setViews() {
+        navigationItem.title = role == .user ? "选择教室" : "教室管理"
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        if role == .admin {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction))
         }
     }
     
@@ -54,8 +67,36 @@ class RoomsViewController: UIViewController {
                 
             }
             .disposed(by: disposeBag)
-            
-
+    }
+    
+    @objc private func addAction() {
+        self.navigationController?.pushViewController(RoomDetailViewController(room: nil), animated: true)
+    }
+    
+    private func delete(_ room: Room) {
+        let alert = UIAlertController(title: "是否删除", message: nil, preferredStyle: .alert)
+        alert.addAction(title: "取消", style: .cancel, isEnabled: true) { _ in
+//            alert.dismiss(animated: true)
+        }
+        alert.addAction(title: "删除", style: .destructive, isEnabled: true) { _ in
+//            alert.dismiss(animated: true)
+            self.deleteRoom(room)
+        }
+        alert.show()
+    }
+    
+    private func deleteRoom(_ room: Room) {
+        apiProvider.rx
+            .request(.deleteRoom(id: room.id))
+            .filterError()
+            .subscribe { [weak self] _ in
+                self?.bindData()
+            } onFailure: { error in
+                
+            } onDisposed: {
+                
+            }
+            .disposed(by: disposeBag)
     }
     
 }
@@ -78,8 +119,23 @@ extension RoomsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let room = datas[indexPath.row]
+        if role == .admin {
+            self.navigationController?.pushViewController(RoomDetailViewController(room: room), animated: true)
+        }
     }
+//    - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//        [self.dataArray removeObjectAtIndex:indexPath.row];
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else {
+            return
+        }
+        let room = datas[indexPath.row]
+        self.delete(room)
+    }
 }
 
 

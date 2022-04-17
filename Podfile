@@ -9,6 +9,7 @@ target 'order' do
   pod 'Defaults'
   pod 'ProgressHUD'
   pod 'SwifterSwift'
+  pod 'Eureka'
 
   # Pods for order
 

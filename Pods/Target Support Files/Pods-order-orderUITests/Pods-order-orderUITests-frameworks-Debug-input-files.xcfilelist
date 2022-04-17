@@ -1,6 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-order-orderUITests/Pods-order-orderUITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/Defaults/Defaults.framework
+${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework
 ${BUILT_PRODUCTS_DIR}/Moya/Moya.framework
 ${BUILT_PRODUCTS_DIR}/ProgressHUD/ProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
