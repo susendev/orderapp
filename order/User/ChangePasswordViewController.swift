@@ -15,6 +15,7 @@ class ChangePasswordViewController: FormViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         self.navigationItem.title = "修改密码"
         form
         +++ PasswordRow("old"){

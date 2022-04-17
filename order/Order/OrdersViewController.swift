@@ -1,5 +1,5 @@
 //
-//  UsersViewController.swift
+//  OrdersViewController.swift
 //  order
 //
 //  Created by yigua on 2022/4/17.
@@ -8,9 +8,8 @@
 import Foundation
 import UIKit
 import RxSwift
-import ProgressHUD
 
-class UsersViewController: UIViewController {
+class OrdersViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
 
@@ -23,12 +22,16 @@ class UsersViewController: UIViewController {
         return view
     }()
     
-    var datas = [User]() {
+    var datas = [Order]() {
         didSet {
             self.tableView.reloadData()
         }
     }
-        
+    
+    var role: Role {
+        return State.shared.user?.role ?? .user
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setViews()
@@ -42,19 +45,19 @@ class UsersViewController: UIViewController {
     
     private func setViews() {
         view.backgroundColor = .systemBackground
-        navigationItem.title = "用户管理"
+        navigationItem.title = role == .user ? "我的订单" : "订单列表"
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction))
     }
     
     private func bindData() {
+        let user = State.shared.user?.role == .user ? State.shared.user?.id : nil
         apiProvider.rx
-            .request(.allUsers)
+            .request(.orders(user: user))
             .filterError()
-            .map([User].self, atKeyPath: "data")
+            .map([Order].self, atKeyPath: "data")
             .subscribe { [weak self] rooms in
                 self?.datas = rooms
             } onFailure: { error in
@@ -64,18 +67,10 @@ class UsersViewController: UIViewController {
             }
             .disposed(by: disposeBag)
     }
-    
-    @objc private func addAction() {
-        self.navigationController?.pushViewController(AddUserViewController(), animated: true)
-    }
-    
-    private func delete(_ user: User) {
-        if user.role == .admin {
-            ProgressHUD.showFailed("无法删除管理员")
-            return
-        }
+        
+    private func deleteRoom(_ room: Room) {
         apiProvider.rx
-            .request(.deleteUser(id: user.id))
+            .request(.deleteRoom(id: room.id))
             .filterError()
             .subscribe { [weak self] _ in
                 self?.bindData()
@@ -86,10 +81,10 @@ class UsersViewController: UIViewController {
             }
             .disposed(by: disposeBag)
     }
-        
+    
 }
 
-extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
+extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datas.count
@@ -98,31 +93,29 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: RoomsTableViewCell.self, for: indexPath)
         let model = datas[indexPath.row]
-        cell.textLabel?.text = model.username
-        cell.valueLabel.text = model.role == .admin ? "管理员" : "用户"
+        cell.textLabel?.text = model.roomName
+        if State.shared.user?.role == .admin {
+            cell.detailTextLabel?.text = model.userName
+        }
+        cell.valueLabel.text = "预定日期：\(model.date)"
+//        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let user = datas[indexPath.row]
-        let alert = UIAlertController(title: "选择操作", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(title: "取消", style: .cancel, isEnabled: true) { _ in
-
-        }
-        alert.addAction(title: "删除", style: .destructive, isEnabled: true) { _ in
-            self.delete(user)
-        }
-//        alert.addAction(title: "充值密码", style: .destructive, isEnabled: true) { _ in
-//            self.deleteRoom(room)
+//        let room = datas[indexPath.row]
+//        if role == .admin {
+//            self.navigationController?.pushViewController(RoomDetailViewController(room: room), animated: true)
+//        } else {
+//            self.navigationController?.pushViewController(OrderViewController(room: room), animated: true)
 //        }
-        alert.show()
     }
 
 }
 
 
-class UsersTableViewCell: UITableViewCell {
+class OrdersTableViewCell: UITableViewCell {
     
     lazy var valueLabel: UILabel = {
         let view = UILabel()

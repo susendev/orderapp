@@ -17,8 +17,8 @@ struct Room: Codable {
     
     var seats: Int
     
-    var scheduledSeats: Int
-    
-    var unScheduledSeats: Int
+//    var scheduledSeats: Int
+//    
+//    var unScheduledSeats: Int
     
 }

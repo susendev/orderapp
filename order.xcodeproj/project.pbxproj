@@ -12,6 +12,9 @@
 		0B5AA83A280BDF0300416EEC /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA839280BDF0300416EEC /* UsersViewController.swift */; };
 		0B5AA83C280BEC7700416EEC /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA83B280BEC7700416EEC /* AddUserViewController.swift */; };
 		0B5AA83E280BF56300416EEC /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA83D280BF56300416EEC /* ChangePasswordViewController.swift */; };
+		0B5AA841280C2C7C00416EEC /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA840280C2C7C00416EEC /* OrderViewController.swift */; };
+		0B5AA843280C387000416EEC /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA842280C387000416EEC /* OrdersViewController.swift */; };
+		0B5AA845280C399300416EEC /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AA844280C399300416EEC /* OrderModel.swift */; };
 		0B6BE80428085F3F00307A1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BE80328085F3F00307A1F /* AppDelegate.swift */; };
 		0B6BE80628085F3F00307A1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BE80528085F3F00307A1F /* SceneDelegate.swift */; };
 		0B6BE80828085F3F00307A1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BE80728085F3F00307A1F /* ViewController.swift */; };
@@ -57,6 +60,9 @@
 		0B5AA839280BDF0300416EEC /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		0B5AA83B280BEC7700416EEC /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		0B5AA83D280BF56300416EEC /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		0B5AA840280C2C7C00416EEC /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		0B5AA842280C387000416EEC /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
+		0B5AA844280C399300416EEC /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		0B6BE80028085F3F00307A1F /* order.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = order.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6BE80328085F3F00307A1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B6BE80528085F3F00307A1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +144,15 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		0B5AA83F280C2C6A00416EEC /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				0B5AA840280C2C7C00416EEC /* OrderViewController.swift */,
+				0B5AA842280C387000416EEC /* OrdersViewController.swift */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
 		0B6BE7F728085F3F00307A1F = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +182,7 @@
 				0B6BE80528085F3F00307A1F /* SceneDelegate.swift */,
 				0B6BE80728085F3F00307A1F /* ViewController.swift */,
 				0B6BE84128096CEE00307A1F /* LoginViewController.swift */,
+				0B5AA83F280C2C6A00416EEC /* Order */,
 				0B5AA838280BDEEF00416EEC /* User */,
 				0B5AA837280BDEB200416EEC /* Room */,
 				0B6BE847280A664E00307A1F /* Models */,
@@ -222,6 +238,7 @@
 			children = (
 				0B6BE848280A667600307A1F /* UserModel.swift */,
 				0B6BE852280AC86400307A1F /* RoomModel.swift */,
+				0B5AA844280C399300416EEC /* OrderModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -497,10 +514,13 @@
 				0B6BE80828085F3F00307A1F /* ViewController.swift in Sources */,
 				0B6BE84D280A9AD200307A1F /* State.swift in Sources */,
 				0B6BE80428085F3F00307A1F /* AppDelegate.swift in Sources */,
+				0B5AA845280C399300416EEC /* OrderModel.swift in Sources */,
+				0B5AA841280C2C7C00416EEC /* OrderViewController.swift in Sources */,
 				0B6BE84B280A6D0100307A1F /* NetworkErrorPlugin.swift in Sources */,
 				0B5AA836280B02C100416EEC /* RoomDetailViewController.swift in Sources */,
 				0B6BE83A28090DB600307A1F /* Defaults.swift in Sources */,
 				0B6BE8352808623700307A1F /* NetWork.swift in Sources */,
+				0B5AA843280C387000416EEC /* OrdersViewController.swift in Sources */,
 				0B6BE851280AC07600307A1F /* RoomsViewController.swift in Sources */,
 				0B6BE80628085F3F00307A1F /* SceneDelegate.swift in Sources */,
 				0B6BE849280A667600307A1F /* UserModel.swift in Sources */,

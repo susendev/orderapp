@@ -34,6 +34,7 @@ class RoomsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         setViews()
         bindData()
     }
@@ -112,7 +113,7 @@ extension RoomsViewController: UITableViewDelegate, UITableViewDataSource {
         let model = datas[indexPath.row]
         cell.textLabel?.text = model.name
         cell.detailTextLabel?.text = model.address
-        cell.valueLabel.text = "剩余：\(model.unScheduledSeats)"
+        cell.valueLabel.text = "座位数：\(model.seats)"
         cell.accessoryType = .disclosureIndicator
         return cell
     }
@@ -122,6 +123,8 @@ extension RoomsViewController: UITableViewDelegate, UITableViewDataSource {
         let room = datas[indexPath.row]
         if role == .admin {
             self.navigationController?.pushViewController(RoomDetailViewController(room: room), animated: true)
+        } else {
+            self.navigationController?.pushViewController(OrderViewController(room: room), animated: true)
         }
     }
     

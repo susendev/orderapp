@@ -32,9 +32,11 @@ public extension Response {
         guard let json = try self.mapJSON() as? [String: Any] else {
             return self
         }
-        if json["code"] as? Int != 20000 {
-            let message = json["message"] as? String
-            ProgressHUD.showFailed(message ?? "未知错误", interaction: true)
+        if let code = json["code"] as? Int,
+            code != 20000 {
+            let message = json["message"] as? String ?? "未知错误"
+            ProgressHUD.showFailed(message, interaction: true)
+            throw NSError(domain: message, code: code)
         }
         return self
     }

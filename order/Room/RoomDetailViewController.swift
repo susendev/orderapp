@@ -26,6 +26,7 @@ class RoomDetailViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         form +++ TextRow("name"){
             $0.title = "教室名"
             $0.placeholder = "例如：303"

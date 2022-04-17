@@ -42,6 +42,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         view.addSubview(welcomeLabel)
         view.addSubview(nameLabel)
         view.addSubview(collectionView)
@@ -92,7 +93,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDa
             case 0:
                 self.navigationController?.pushViewController(RoomsViewController(), animated: true)
             case 1:
-                break
+                self.navigationController?.pushViewController(OrdersViewController(), animated: true)
             case 2:
                 self.navigationController?.pushViewController(UsersViewController(), animated: true)
             case 3:
@@ -109,7 +110,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDa
             case 0:
                 self.navigationController?.pushViewController(RoomsViewController(), animated: true)
             case 1:
-                break
+                self.navigationController?.pushViewController(OrdersViewController(), animated: true)
             case 2:
                 self.navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
             case 3:

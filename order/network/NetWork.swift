@@ -31,6 +31,9 @@ enum API {
     case changeRoomDetail(id: String, detail: [String: Any])
     case addRoom(detail: [String: Any])
     case deleteRoom(id: String)
+    
+    case order(user: String, room: String, date: String)
+    case orders(user: String?)
 }
 
 
@@ -56,14 +59,16 @@ extension API: TargetType {
             return "/users/\(id)"
         case .changePassword:
             return "/user/changePassword"
+        case .order, .orders:
+            return "/orders"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .userLogin, .userLogout, .addRoom, .addUser, .changePassword:
+        case .userLogin, .userLogout, .addRoom, .addUser, .changePassword, .order:
             return .post
-        case .allRooms, .roomDetail, .allUsers:
+        case .allRooms, .roomDetail, .allUsers, .orders:
             return .get
         case .changeRoomDetail:
             return .put
@@ -95,6 +100,12 @@ extension API: TargetType {
             break
         case let .changePassword(old, new):
             body = ["old": old, "new": new]
+        case let .order(user, room, date):
+            body = ["user": user, "room": room, "date": date]
+        case let .orders(user):
+            if let user = user {
+                query = ["user": user]
+            }
         }
         if method == .get {
             return .requestParameters(parameters: query, encoding: URLEncoding.queryString)

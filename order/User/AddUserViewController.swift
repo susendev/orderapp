@@ -16,6 +16,7 @@ class AddUserViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         self.navigationItem.title = "添加用户"
         form +++ TextRow("username"){
             $0.title = "用户名"
